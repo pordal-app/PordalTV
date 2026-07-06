@@ -16,8 +16,8 @@ Every deviation from upstream is recorded in [REVERT-LEDGER.md](REVERT-LEDGER.md
 
 | # | Theme | Status |
 |---|---|---|
-| 0 | Env setup + docs scaffolding (this commit) | in progress |
-| 1 | Identity + backend detach (app IDs, name, GitHub owner/repo, versioning, keystore fallbacks, donations no-op patch) | pending |
+| 0 | Env setup + docs scaffolding | done (56802dc1) |
+| 1 | Identity + backend detach (app IDs, name, GitHub owner/repo, versioning, keystore fallbacks, donations no-op patch) | in progress |
 | 2 | Feature gates + default flips (accounts, pickers, settings, cloud tab; catalog suffix/addon-name, autoplay, overlays) | pending |
 | 3 | Default addons + boot-gate emission bug fix (if still present upstream) | pending |
 | 4 | Visual assets (icons, banners, logos, splash `#051D2A`) — blocked on brand masters location | pending |
@@ -28,16 +28,19 @@ Every deviation from upstream is recorded in [REVERT-LEDGER.md](REVERT-LEDGER.md
 
 - Addon: `http://addon.pordal.app:60201` (catalog/meta/stream, movie+series, IMDb
   `tt…` IDs, no subtitles resource — keep OpenSubtitles).
-- App IDs: `app.pordal.tv` (full) / `app.pordal.play` (playstore) / `.dev` suffix
-  for debug (NOT `.debug` — benchmark buildType owns it).
+- App IDs: `app.pordal.tv` (full) / `app.pordal.tv.store` (playstore) / `.dev`
+  suffix for debug (NOT `.debug` — benchmark buildType owns it). Everything under
+  `app.pordal.tv.*` so future non-TV Pordal apps get their own namespace.
 - GitHub: `pordal-app/PordalTV`; releases wiped by the re-fork (old 0.1.0-beta /
   versionCode 2 is gone). CI secrets must be re-added before Round 6.
 - Splash: `#051D2A`.
 
 ## Open decisions
 
-- Version numbering (proposal: versionName `0.2.0-beta`, versionCode 1035).
 - Location of brand-asset masters (Figma export folder moved from `~/Downloads`).
+
+Resolved: versioning restarts at `0.2.0-beta` / versionCode 1035 (above upstream's
+1034 and the old released Pordal versionCode 2).
 
 ## Verification protocol (after each round)
 

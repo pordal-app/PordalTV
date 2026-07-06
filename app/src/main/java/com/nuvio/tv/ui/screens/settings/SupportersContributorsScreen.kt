@@ -92,14 +92,14 @@ import java.util.Locale
 private val DONATIONS_URL: String
     get() = BuildConfig.DONATIONS_BASE_URL
         .takeIf { it.isNotBlank() }
-        ?: error("DONATIONS_BASE_URL is missing. Set it in local.properties or local.dev.properties.")
-        .removeSuffix("/")
+        ?.removeSuffix("/")
+        ?: "https://placeholder.invalid"
 
 private val DONATE_URL: String
     get() = BuildConfig.DONATIONS_DONATE_URL
         .takeIf { it.isNotBlank() }
-        ?: error("DONATIONS_DONATE_URL is missing. Set it in local.properties or local.dev.properties.")
-        .removeSuffix("/")
+        ?.removeSuffix("/")
+        ?: "https://placeholder.invalid"
 
 @Composable
 fun SupportersContributorsScreen(

@@ -437,9 +437,11 @@ object NetworkModule {
     @Singleton
     @Named("donations")
     fun provideDonationsRetrofit(okHttpClient: OkHttpClient, moshi: Moshi): Retrofit {
+        // No donations backend configured: point Retrofit at an unreachable placeholder
+        // so DI stays satisfied and callers just see failed requests.
         val baseUrl = BuildConfig.DONATIONS_BASE_URL
             .takeIf { it.isNotBlank() }
-            ?: error("DONATIONS_BASE_URL is missing. Set it in local.properties or local.dev.properties.")
+            ?: "https://placeholder.invalid/"
 
         return Retrofit.Builder()
             .baseUrl(baseUrl)
