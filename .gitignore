@@ -49,5 +49,8 @@ bugs/
 avatars/
 logs
 AGENTS.md
-docs/
+docs/*
+!docs/essential-mode.md
+!docs/PLAN.md
+!docs/REVERT-LEDGER.md
 status-page/
