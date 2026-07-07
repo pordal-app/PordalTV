@@ -1702,7 +1702,8 @@ private fun PlayerControlsOverlay(
                     }
 
                     val hasYear = !uiState.releaseYear.isNullOrBlank()
-                    val showVia = !uiState.isPlaying && !uiState.currentStreamName.isNullOrBlank()
+                    // Pordal: stream-source attribution hidden (see docs/REVERT-LEDGER.md R3-3)
+                    val showVia = false
                     val yearText = uiState.releaseYear.orEmpty()
 
                     if (hasYear || showVia) {

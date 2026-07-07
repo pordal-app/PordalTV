@@ -30,6 +30,8 @@ default flipped), **code** (behavioral edit), **build** (build/CI/infra change),
 | R2-11 | 2 | code | `LibraryScreen.kt` | source badge: `else` branch blank instead of "LOCAL"; `"NUVIO"` literal → `"PORDAL"` | Restore `library_source_local` string and `"NUVIO"` |
 | R3-1 | 3 | default | `AddonPreferences.kt` | default addons: Cinemeta → `http://addon.pordal.app:60201` (OpenSubtitles kept — addon has no subtitles resource) | Restore `https://v3-cinemeta.strem.io`; only affects fresh installs (DataStore keeps existing users' addons) |
 | R3-2 | 3 | code | `AddonRepositoryImpl.kt` | `getInstalledAddons()`: emit empty list when cold cache + failed manifest fetch (was: no emission → permanent black screen at boot gate) | Genuine upstream bug fix — keep; candidate to upstream |
+| R3-3 | 3 | code | `PlayerScreen.kt`, `PostPlayOverlay.kt`, `values/strings.xml` | player pause overlay "via <stream>" hidden (`showVia = false`); next-episode countdown uses new `next_episode_playing_countdown` ("Playing in %1$ds") instead of "Playing via %1$s in %2$ds" | Restore `showVia` expression `!uiState.isPlaying && !uiState.currentStreamName.isNullOrBlank()` and the `next_episode_playing_via` branch (string + sourceName condition kept in tree) |
+| R3-4 | 3 | code | `NuvioNavHost.kt` | playback-error back navigation lands on the Detail page (pop to existing detail entry, or navigate to one) instead of the source-selection screen; upstream stream-screen fallback kept for unknown contentId | Delete the Pordal branch at the top of `onPlaybackErrorBack`; the original body is intact below it |
 
 Not ledgered (not deviations): `local.properties`, `nuviotv.jks` dev keystore
 (both gitignored, machine-local only).

@@ -943,6 +943,41 @@ fun NuvioNavHost(
                     }
                 },
                 onPlaybackErrorBack = {
+                    // Pordal: after a playback error, land on the Detail page instead of the
+                    // source-selection screen (docs/REVERT-LEDGER.md R3-4). With autoplay the
+                    // stream list was never user-visible on the way in.
+                    val errorArgs = backStackEntry.arguments
+                    val errorContentId = errorArgs?.getString("contentId").orEmpty()
+                    val errorContentType = errorArgs?.getString("contentType").orEmpty()
+                    val errorDetailEntry = if (errorContentId.isNotBlank()) {
+                        navController.currentBackStack.value.lastOrNull {
+                            val itemId = it.arguments?.getString("itemId").orEmpty()
+                            val itemType = it.arguments?.getString("itemType").orEmpty()
+                            it.destination.route?.startsWith("detail/") == true &&
+                                itemId == errorContentId &&
+                                (itemType.isBlank() || errorContentType.isBlank() || itemType.equals(errorContentType, ignoreCase = true))
+                        }
+                    } else {
+                        null
+                    }
+                    if (errorDetailEntry != null) {
+                        navController.popBackStack(Screen.Detail.route, inclusive = false)
+                    } else if (errorContentId.isNotBlank()) {
+                        navController.navigate(
+                            Screen.Detail.createRoute(
+                                itemId = errorContentId,
+                                itemType = errorContentType,
+                                addonBaseUrl = null,
+                                returnToHomeOnBack = errorArgs?.getString("returnToHomeOnBack")
+                                    ?.toBooleanStrictOrNull() == true,
+                                heroBackdropUrl = errorArgs?.getString("backdrop")
+                            )
+                        ) {
+                            popUpTo(Screen.Player.route) { inclusive = true }
+                            launchSingleTop = true
+                        }
+                    } else {
+                    // Upstream fallback (content unknown): return to the source-selection screen.
                     val returnedToStream = navController.popBackStack(Screen.Stream.route, inclusive = false)
                     if (!returnedToStream) {
                         val args = backStackEntry.arguments
@@ -980,6 +1015,7 @@ fun NuvioNavHost(
                                 launchSingleTop = true
                             }
                         }
+                    }
                     }
                 }
             )
