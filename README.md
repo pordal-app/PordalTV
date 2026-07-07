@@ -1,105 +1,69 @@
 <div align="center">
 
-  <img src="assets/brand/app_logo_wordmark.png" alt="NuvioTV" width="300" />
-  <br />
-  <br />
+  <img src="assets/brand/app_logo_mark.png" alt="Pordal" width="120" />
 
-  [![Contributors][contributors-shield]][contributors-url]
-  [![Forks][forks-shield]][forks-url]
-  [![Stargazers][stars-shield]][stars-url]
-  [![Issues][issues-shield]][issues-url]
-  [![License][license-shield]][license-url]
+  # PordalTV
 
   <p>
-    A modern Android TV media player powered by the Stremio addon ecosystem.
+    A lean Android TV media player powered by the Stremio addon ecosystem.
     <br />
-    Stremio Addon ecosystem • Android TV optimized • Playback-focused experience
+    Kotlin • Jetpack Compose • TV-first playback
   </p>
 
 </div>
 
 ## About
 
-NuvioTV is a modern media player designed specifically for Android TV.
+PordalTV is a streamlined media player for Android TV. It boots straight into a
+curated home screen, resolves content and sources through Stremio-compatible
+addons, and plays with a click — no accounts, no onboarding, no source-picking
+ceremony.
 
-It acts as a client-side playback interface that can integrate with the Stremio addon ecosystem for content discovery and source resolution through user-installed extensions.
-
-Built with Kotlin and optimized for a TV-first viewing experience.
+PordalTV is a fork of the open-source
+[NuvioTV](https://github.com/NuvioMedia/NuvioTV) project. Enormous credit to the
+NuvioTV authors and contributors — the player engine, addon client, and UI
+foundations are theirs. This fork trims the experience down to a
+proof-of-concept shape (features are gated, not removed) and rebrands the
+surface.
 
 ## Installation
 
-### Android TV
+Sideload the APK for your device architecture from
+[Releases](https://github.com/pordal-app/PordalTV/releases) (arm64-v8a for
+virtually all modern TV devices). Release builds check GitHub for updates and
+prompt in-app.
 
-Download the latest APK from [GitHub Releases](https://github.com/tapframe/NuvioTV/releases/latest) and install on your Android TV device.
+## Building
 
-## Development
+JDK 17 and the Android SDK (platform 36) are required. Create
+`local.properties` at the repo root with at least:
 
-### Prerequisites
-
-- Android Studio (latest version)
-- JDK 11+
-- Android SDK (API 29+)
-- Gradle 8.0+
-
-### Setup
-
-```bash
-git clone https://github.com/tapframe/NuvioTV.git
-cd NuvioTV
+```properties
+sdk.dir=/path/to/Android/sdk
+TMDB_API_KEY=your_tmdb_v3_api_key
+NUVIO_SUPABASE_URL=https://placeholder.invalid
+NUVIO_SUPABASE_ANON_KEY=placeholder
+NUVIO_RELEASE_KEY_ALIAS=nuviotv
+NUVIO_RELEASE_KEY_PASSWORD=your_keystore_password
+NUVIO_RELEASE_STORE_PASSWORD=your_keystore_password
 ```
 
-### Full Debug Build
+All builds (including debug) sign with the release config: generate a
+throwaway keystore at the repo root with
+`keytool -genkeypair -keystore nuviotv.jks -alias nuviotv`. Then:
 
-```bash
-./gradlew :app:compileFullDebugKotlin
+```sh
 ./gradlew :app:assembleFullDebug
 ```
 
-### Running on Emulator or Device
+Project documentation lives in [docs/PLAN.md](docs/PLAN.md); every deviation
+from upstream is tracked in [docs/REVERT-LEDGER.md](docs/REVERT-LEDGER.md).
 
-```bash
-# Full debug build
-./gradlew :app:assembleFullDebug
+## License
 
-# Run on connected device
-adb shell am start -n com.nuviodebug.com/com.nuvio.tv.MainActivity
-```
+Licensed under the [GNU General Public License v3.0](LICENSE), as inherited
+from NuvioTV. Source code for this fork is maintained at
+[pordal-app/PordalTV](https://github.com/pordal-app/PordalTV).
 
-## Legal & DMCA
-
-NuvioTV functions solely as a client-side interface for browsing metadata and playing media provided by user-installed extensions and/or user-provided sources. It is intended for content the user owns or is otherwise authorized to access.
-
-NuvioTV is not affiliated with any third-party extensions or content providers. It does not host, store, or distribute any media content.
-
-For comprehensive legal information, including our full disclaimer, third-party extension policy, and DMCA/Copyright information, please visit our **[Legal & Disclaimer Page](https://nuvioapp.space/legal)**.
-
-## Built With
-
-* Kotlin
-* Jetpack Compose & TV Material3
-* ExoPlayer / Media3
-* Hilt (Dependency Injection)
-* Retrofit (Networking)
-* Gradle
-
-## Star History
-
-<a href="https://www.star-history.com/#tapframe/NuvioTV&type=date&legend=top-left">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=tapframe/NuvioTV&type=date&theme=dark&legend=top-left" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=tapframe/NuvioTV&type=date&legend=top-left" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=tapframe/NuvioTV&type=date&legend=top-left" />
- </picture>
-</a>
-
-<!-- MARKDOWN LINKS & IMAGES -->
-[contributors-shield]: https://img.shields.io/github/contributors/tapframe/NuvioTV.svg?style=for-the-badge
-[contributors-url]: https://github.com/tapframe/NuvioTV/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/tapframe/NuvioTV.svg?style=for-the-badge
-[forks-url]: https://github.com/tapframe/NuvioTV/network/members
-[stars-shield]: https://img.shields.io/github/stars/tapframe/NuvioTV.svg?style=for-the-badge
-[stars-url]: https://github.com/tapframe/NuvioTV/stargazers
-[issues-shield]: https://img.shields.io/github/issues/tapframe/NuvioTV.svg?style=for-the-badge
-[issues-url]: https://github.com/tapframe/NuvioTV/issues
-[license-shield]: https://img.shields.io/github/license/tapframe/NuvioTV.svg?style=for-the-badge
-[license-url]: http://www.gnu.org/licenses/gpl-3.0.en.html
+Metadata and artwork are provided by [TMDB](https://www.themoviedb.org/). This
+product uses the TMDB API but is not endorsed or certified by TMDB.

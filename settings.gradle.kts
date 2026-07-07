@@ -23,7 +23,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "My Application"
+rootProject.name = "PordalTV"
 include(":app")
 include(":baselineprofile")
 include(":ffmpeg-decoder-downmix")
