@@ -148,6 +148,13 @@ android {
         // In-app updater (GitHub Releases)
         buildConfigField("String", "GITHUB_OWNER", "\"pordal-app\"")
         buildConfigField("String", "GITHUB_REPO", "\"PordalTV\"")
+
+        // Pordal PoC feature gates, all off for the lean build.
+        // Each has a revert entry in docs/REVERT-LEDGER.md.
+        buildConfigField("boolean", "FEATURE_ACCOUNTS_ENABLED", "false")
+        buildConfigField("boolean", "FEATURE_ONBOARDING_PICKERS_ENABLED", "false")
+        buildConfigField("boolean", "FEATURE_SETTINGS_MENU_ENABLED", "false")
+        buildConfigField("boolean", "FEATURE_CLOUD_LIBRARY_TAB_ENABLED", "false")
     }
 
     flavorDimensions += "distribution"

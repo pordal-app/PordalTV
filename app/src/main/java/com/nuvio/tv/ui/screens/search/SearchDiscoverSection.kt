@@ -153,22 +153,24 @@ internal fun DiscoverSection(
                 blockFocus = blockFilterFocus
             )
 
-            DiscoverDropdownPicker(
-                modifier = Modifier.weight(1f),
-                title = stringResource(R.string.discover_filter_catalog),
-                value = selectedCatalogLabel,
-                selectedValue = uiState.selectedDiscoverCatalogKey,
-                expanded = expandedPicker == "catalog",
-                options = filteredCatalogs.map { DiscoverOption(it.catalogName, it.key) },
-                onExpandedChange = { shouldExpand ->
-                    expandedPicker = if (shouldExpand) "catalog" else null
-                },
-                onSelect = { option ->
-                    onSelectCatalog(option.value)
-                    expandedPicker = null
-                },
-                blockFocus = blockFilterFocus
-            )
+            if (filteredCatalogs.size > 1) {
+                DiscoverDropdownPicker(
+                    modifier = Modifier.weight(1f),
+                    title = stringResource(R.string.discover_filter_catalog),
+                    value = selectedCatalogLabel,
+                    selectedValue = uiState.selectedDiscoverCatalogKey,
+                    expanded = expandedPicker == "catalog",
+                    options = filteredCatalogs.map { DiscoverOption(it.catalogName, it.key) },
+                    onExpandedChange = { shouldExpand ->
+                        expandedPicker = if (shouldExpand) "catalog" else null
+                    },
+                    onSelect = { option ->
+                        onSelectCatalog(option.value)
+                        expandedPicker = null
+                    },
+                    blockFocus = blockFilterFocus
+                )
+            }
 
             DiscoverDropdownPicker(
                 modifier = Modifier.weight(1f),
@@ -193,7 +195,9 @@ internal fun DiscoverSection(
 
         selectedCatalog?.let { catalog ->
             val metadataSegments = buildList {
-                add(catalog.addonName)
+                if (uiState.catalogAddonNameEnabled) {
+                    add(catalog.addonName)
+                }
                 if (uiState.catalogTypeSuffixEnabled) {
                     localizedTypeLabel(catalog.type)
                         .takeIf { it.isNotEmpty() }

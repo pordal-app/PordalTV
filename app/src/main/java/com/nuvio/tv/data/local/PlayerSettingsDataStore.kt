@@ -133,7 +133,7 @@ val AVAILABLE_TMDB_LANGUAGES = AVAILABLE_SUBTITLE_LANGUAGES + listOf(
  * Data class representing subtitle style settings
  */
 data class SubtitleStyleSettings(
-    val preferredLanguage: String = "en",
+    val preferredLanguage: String = "none",
     val secondaryPreferredLanguage: String? = null,
     val useForcedSubtitles: Boolean = false,
     val showOnlyPreferredLanguages: Boolean = false,
@@ -232,8 +232,8 @@ data class PlayerSettings(
     val rememberAudioDelayPerDevice: Boolean = true,
     val preferredAudioLanguage: String = AudioLanguageOption.DEVICE,
     val secondaryPreferredAudioLanguage: String? = null,
-    val loadingOverlayEnabled: Boolean = true,
-    val showPlayerLoadingStatus: Boolean = true,
+    val loadingOverlayEnabled: Boolean = false,
+    val showPlayerLoadingStatus: Boolean = false,
     val playbackIssueReportsEnabled: Boolean = false,
     val pauseOverlayEnabled: Boolean = true,
     val osdClockEnabled: Boolean = true,
@@ -824,8 +824,8 @@ class PlayerSettingsDataStore @Inject constructor(
                 ),
                 secondaryPreferredAudioLanguage = prefs[secondaryPreferredAudioLanguageKey]
                     ?.let(::normalizeSecondaryAudioLanguageCode),
-                loadingOverlayEnabled = prefs[loadingOverlayEnabledKey] ?: true,
-                showPlayerLoadingStatus = prefs[showPlayerLoadingStatusKey] ?: true,
+                loadingOverlayEnabled = prefs[loadingOverlayEnabledKey] ?: false,
+                showPlayerLoadingStatus = prefs[showPlayerLoadingStatusKey] ?: false,
                 playbackIssueReportsEnabled = prefs[playbackIssueReportsEnabledKey] ?: false,
                 pauseOverlayEnabled = prefs[pauseOverlayEnabledKey] ?: true,
                 osdClockEnabled = prefs[osdClockEnabledKey] ?: true,
@@ -851,8 +851,8 @@ class PlayerSettingsDataStore @Inject constructor(
                 } ?: if (prefs[frameRateMatchingKey] == true) FrameRateMatchingMode.START_STOP else FrameRateMatchingMode.OFF,
                 resolutionMatchingEnabled = prefs[resolutionMatchingEnabledKey] ?: false,
                 streamAutoPlayMode = prefs[streamAutoPlayModeKey]?.let {
-                    runCatching { StreamAutoPlayMode.valueOf(it) }.getOrDefault(StreamAutoPlayMode.MANUAL)
-                } ?: StreamAutoPlayMode.MANUAL,
+                    runCatching { StreamAutoPlayMode.valueOf(it) }.getOrDefault(StreamAutoPlayMode.FIRST_STREAM)
+                } ?: StreamAutoPlayMode.FIRST_STREAM,
                 streamAutoPlaySource = prefs[streamAutoPlaySourceKey]?.let {
                     runCatching { StreamAutoPlaySource.valueOf(it) }.getOrDefault(StreamAutoPlaySource.ALL_SOURCES)
                 } ?: StreamAutoPlaySource.ALL_SOURCES,
@@ -1360,7 +1360,7 @@ class PlayerSettingsDataStore @Inject constructor(
     ): String {
         val preferred = preferredLanguage
             ?.let(::normalizeSelectableLanguageCode)
-            ?: return "en"
+            ?: return "none"
         if (preferred != SUBTITLE_LANGUAGE_FORCED) return preferred
 
         return secondaryLanguage

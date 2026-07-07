@@ -265,7 +265,7 @@ fun SettingsScreen(
                 SettingsCategory.EXPERIENCE -> false
                 SettingsCategory.DEBUG -> BuildConfig.IS_DEBUG_BUILD && !isEssentialMode
                 SettingsCategory.PROFILES -> isPrimaryProfileActive
-                SettingsCategory.ACCOUNT -> isPrimaryProfileActive
+                SettingsCategory.ACCOUNT -> BuildConfig.FEATURE_ACCOUNTS_ENABLED && isPrimaryProfileActive
                 SettingsCategory.LAYOUT -> true
                 SettingsCategory.CONTENT_DISCOVERY -> true
                 SettingsCategory.INTEGRATION -> true

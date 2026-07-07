@@ -17,6 +17,17 @@ default flipped), **code** (behavioral edit), **build** (build/CI/infra change),
 | R1-5 | 1 | build | `app/build.gradle.kts` | removed hardcoded `815787` keystore password fallbacks | Keep — signing now fails loudly instead of silently using upstream's dev passwords |
 | R1-6 | 1 | text | `values/strings.xml`, `debug/res/values/strings.xml` | `app_name` → Pordal / Pordal Debug | Permanent identity |
 | R1-7 | 1 | code | `NetworkModule.kt`, `SupportersContributorsScreen.kt` | blank `DONATIONS_BASE_URL`/`DONATIONS_DONATE_URL` fall back to `https://placeholder.invalid` instead of crashing DI (`error()`) | Restore `error()` calls if a donations backend is ever configured; candidate to upstream |
+| R2-1 | 2 | flag | `app/build.gradle.kts`, `MainActivity.kt`, `SettingsScreen.kt` | `FEATURE_ACCOUNTS_ENABLED=false`: skips first-boot QR sign-in, hides Settings→Account | Flip flag to `true` (needs Supabase backend, see PLAN roadmap) |
+| R2-2 | 2 | flag | `app/build.gradle.kts`, `MainActivity.kt` | `FEATURE_ONBOARDING_PICKERS_ENABLED=false`: start destination forced Home, experience mode defaults ADVANCED | Flip flag to `true` |
+| R2-3 | 2 | flag | `app/build.gradle.kts`, `MainActivity.kt` | `FEATURE_SETTINGS_MENU_ENABLED=false`: Settings removed from sidebar drawer | Flip flag to `true` |
+| R2-4 | 2 | flag | `app/build.gradle.kts`, `LibraryScreen.kt` | `FEATURE_CLOUD_LIBRARY_TAB_ENABLED=false`: Cloud view-mode button hidden in Library | Flip flag to `true` |
+| R2-5 | 2 | default | `LayoutPreferenceDataStore.kt` + UI-state initials (`HomeUiState`, `SearchUiState`, `FolderDetailViewModel`, `LayoutSettingsViewModel`, `HomeViewModelPresentationPipeline`) | `catalogAddonNameEnabled` and `catalogTypeSuffixEnabled` default `false` | Restore `?: true` / `= true` defaults |
+| R2-6 | 2 | default | `PlayerSettingsDataStore.kt` | `streamAutoPlayMode` defaults `FIRST_STREAM` (read fallbacks only; UI transients stay MANUAL) | Restore `MANUAL` fallbacks |
+| R2-7 | 2 | default | `PlayerSettingsDataStore.kt` | `loadingOverlayEnabled`, `showPlayerLoadingStatus` default `false` | Restore `true` defaults |
+| R2-8 | 2 | default | `PlayerSettingsDataStore.kt` | preferred subtitle language defaults `"none"` (captions off at playback start; forced-subs migration path keeps `"en"`) | Restore `"en"` in data class + no-stored-value read fallback |
+| R2-9 | 2 | default | `StreamBadgeSettings.kt`, `StreamBadgeSettingsDataStore.kt` | `showAddonLogo` defaults `false` (hides addon logo+name on stream cards, incl. player source panel) | Restore `true` defaults |
+| R2-10 | 2 | code | `SearchDiscoverSection.kt` | catalog dropdown only rendered when >1 catalog; addon-name metadata segment honors `catalogAddonNameEnabled` | Remove `size > 1` gate / unconditionally `add(catalog.addonName)` |
+| R2-11 | 2 | code | `LibraryScreen.kt` | source badge: `else` branch blank instead of "LOCAL"; `"NUVIO"` literal → `"PORDAL"` | Restore `library_source_local` string and `"NUVIO"` |
 
 Not ledgered (not deviations): `local.properties`, `nuviotv.jks` dev keystore
 (both gitignored, machine-local only).

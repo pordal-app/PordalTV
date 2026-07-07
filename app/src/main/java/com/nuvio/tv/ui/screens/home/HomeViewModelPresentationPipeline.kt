@@ -85,7 +85,7 @@ internal fun HomeViewModel.observeLayoutPreferencesPipeline() {
                 heroSectionEnabled = heroSectionEnabled,
                 posterLabelsEnabled = posterLabelsEnabled,
                 catalogAddonNameEnabled = catalogAddonNameEnabled,
-                catalogTypeSuffixEnabled = true,
+                catalogTypeSuffixEnabled = false,
                 classicFocusGradientEnabled = false,
                 hideUnreleasedContent = false,
                 showFullReleaseDate = true

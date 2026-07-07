@@ -490,6 +490,7 @@ class MainActivity : ComponentActivity() {
                     }
 
                     if (
+                        BuildConfig.FEATURE_ACCOUNTS_ENABLED &&
                         hasSeenAuthQrOnFirstLaunch == false &&
                         authState !is AuthState.FullAccount &&
                         !onboardingCompletedThisSession
@@ -560,7 +561,7 @@ class MainActivity : ComponentActivity() {
                         return@Surface
                     }
                     val effectiveExperienceMode = mainUiPrefs.experienceMode
-                        ?: if (layoutChosen) ExperienceMode.ADVANCED else null
+                        ?: if (layoutChosen || !BuildConfig.FEATURE_ONBOARDING_PICKERS_ENABLED) ExperienceMode.ADVANCED else null
                     val needsExperienceSelection = effectiveExperienceMode == null
                     val needsEssentialAddonSetup =
                         effectiveExperienceMode == ExperienceMode.ESSENTIAL &&
@@ -584,6 +585,7 @@ class MainActivity : ComponentActivity() {
                     val hideBuiltInHeadersForFloatingPill = modernSidebarEnabled && !sidebarCollapsed
 
                     val startDestination = when {
+                        !BuildConfig.FEATURE_ONBOARDING_PICKERS_ENABLED -> Screen.Home.route
                         needsExperienceSelection -> Screen.ExperienceModeSelection.route
                         layoutChosen -> Screen.Home.route
                         else -> Screen.LayoutSelection.route
@@ -728,13 +730,15 @@ class MainActivity : ComponentActivity() {
                                     iconRes = R.raw.sidebar_library
                                 )
                             )
-                            add(
-                                DrawerItem(
-                                    route = Screen.Settings.route,
-                                    label = strNavSettings,
-                                    iconRes = R.raw.sidebar_settings
+                            if (BuildConfig.FEATURE_SETTINGS_MENU_ENABLED) {
+                                add(
+                                    DrawerItem(
+                                        route = Screen.Settings.route,
+                                        label = strNavSettings,
+                                        iconRes = R.raw.sidebar_settings
+                                    )
                                 )
-                            )
+                            }
                         }
                     }
                     val selectedDrawerRoute = drawerItems.firstOrNull { item ->

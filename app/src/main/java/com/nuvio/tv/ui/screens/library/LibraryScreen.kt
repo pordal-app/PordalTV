@@ -68,6 +68,7 @@ import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.Icon
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
+import com.nuvio.tv.BuildConfig
 import com.nuvio.tv.core.cloud.CloudLibraryFile
 import com.nuvio.tv.core.cloud.CloudLibraryItem
 import com.nuvio.tv.core.cloud.CloudLibraryItemType
@@ -267,8 +268,8 @@ fun LibraryScreen(
                     text = when {
                         viewMode == LibraryViewMode.Cloud -> stringResource(R.string.library_source_cloud).uppercase()
                         uiState.sourceMode == LibrarySourceMode.TRAKT -> "TRAKT"
-                        uiState.isNuvioAccount -> "NUVIO"
-                        else -> stringResource(R.string.library_source_local)
+                        uiState.isNuvioAccount -> "PORDAL"
+                        else -> ""
                     },
                     style = MaterialTheme.typography.labelLarge,
                     color = if (showBuiltInHeader) NuvioTheme.colors.TextTertiary else Color.Transparent,
@@ -567,7 +568,12 @@ private fun LibraryViewModeRow(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(NuvioTheme.spacing.md)
     ) {
-        LibraryViewMode.entries.forEachIndexed { index, mode ->
+        val visibleModes = if (BuildConfig.FEATURE_CLOUD_LIBRARY_TAB_ENABLED) {
+            LibraryViewMode.entries.toList()
+        } else {
+            listOf(LibraryViewMode.Saved)
+        }
+        visibleModes.forEachIndexed { index, mode ->
             val selected = mode == selectedMode
             Button(
                 onClick = { onSelected(mode) },
