@@ -107,7 +107,7 @@ android {
         applicationId = "app.pordal.tv"
         minSdk = 24
         targetSdk = 36
-        versionCode = 1035
+        versionCode = 1036
         versionName = "0.2.0-beta"
 
         buildConfigField("String", "PARENTAL_GUIDE_API_URL", "\"${localProperties.getProperty("PARENTAL_GUIDE_API_URL", "")}\"")
