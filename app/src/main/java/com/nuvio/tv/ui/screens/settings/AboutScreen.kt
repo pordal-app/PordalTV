@@ -150,7 +150,7 @@ fun AboutSettingsContent(
                     onClick = {
                         val intent = Intent(
                             Intent.ACTION_VIEW,
-                            Uri.parse("https://tapframe.github.io/NuvioStreaming/#privacy-policy")
+                            Uri.parse("https://pordal.app/privacy")
                         )
                         context.startActivity(intent)
                     }

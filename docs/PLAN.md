@@ -21,7 +21,7 @@ Every deviation from upstream is recorded in [REVERT-LEDGER.md](REVERT-LEDGER.md
 | 2 | Feature gates + default flips (accounts, pickers, settings, cloud tab; catalog suffix/addon-name, autoplay, overlays; captions off by default, addon logo off on stream cards) | done |
 | 3 | Default addons + boot-gate emission bug fix (still present upstream — re-applied); player UX polish (no "via" attribution, error-back lands on Detail) | done |
 | 4 | Visual assets (icons, banners, logos; sidebar wordmark is a mark+text lockup). In-app recoloring was tried and rejected — images only, upstream colors stay | done |
-| 5 | Text sweep (strings.xml ×33, Kotlin literals, README/workflows/templates) | pending |
+| 5 | Text sweep — A: app strings (33 locales) + Kotlin literals; B: README/workflows/templates/repo metadata | A in progress |
 | 6 | Release infra (release_beta.py fix, CI secrets re-add, R8 validation, first release) | pending |
 
 ## Fixed facts

@@ -25,7 +25,7 @@ object SupabaseModule {
     @Singleton
     @OptIn(SupabaseInternal::class)
     fun provideSupabaseClient(): SupabaseClient {
-        val userAgent = "NuvioTV/${BuildConfig.VERSION_NAME.ifBlank { "dev" }}"
+        val userAgent = "PordalTV/${BuildConfig.VERSION_NAME.ifBlank { "dev" }}"
         return createSupabaseClient(
             supabaseUrl = BuildConfig.SUPABASE_URL,
             supabaseKey = BuildConfig.SUPABASE_ANON_KEY
