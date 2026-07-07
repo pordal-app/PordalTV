@@ -20,7 +20,7 @@ Every deviation from upstream is recorded in [REVERT-LEDGER.md](REVERT-LEDGER.md
 | 1 | Identity + backend detach (app IDs, name, GitHub owner/repo, versioning, keystore fallbacks, donations no-op patch) | done |
 | 2 | Feature gates + default flips (accounts, pickers, settings, cloud tab; catalog suffix/addon-name, autoplay, overlays; captions off by default, addon logo off on stream cards) | done |
 | 3 | Default addons + boot-gate emission bug fix (still present upstream — re-applied); player UX polish (no "via" attribution, error-back lands on Detail) | done |
-| 4 | Visual assets (icons, banners, logos, splash `#051D2A`) — blocked on brand masters location | pending |
+| 4 | Visual assets (icons, banners, logos; sidebar wordmark is a mark+text lockup). In-app recoloring was tried and rejected — images only, upstream colors stay | done |
 | 5 | Text sweep (strings.xml ×33, Kotlin literals, README/workflows/templates) | pending |
 | 6 | Release infra (release_beta.py fix, CI secrets re-add, R8 validation, first release) | pending |
 
@@ -33,14 +33,17 @@ Every deviation from upstream is recorded in [REVERT-LEDGER.md](REVERT-LEDGER.md
   `app.pordal.tv.*` so future non-TV Pordal apps get their own namespace.
 - GitHub: `pordal-app/PordalTV`; releases wiped by the re-fork (old 0.1.0-beta /
   versionCode 2 is gone). CI secrets must be re-added before Round 6.
-- Splash: `#051D2A`.
+- Brand: nebula gradient `#FF5CAE #9B5CFF #4D7CFF #3AD6D0`, background `#141317`,
+  brand white `#F4F2F0` — used in artwork only; in-app UI keeps upstream colors
+  (Jacob rejected an in-app recolor pass). Masters: `~/Downloads/Pordal TV Icons/`.
 
 ## Open decisions
 
-- Location of brand-asset masters (Figma export folder moved from `~/Downloads`).
+(none currently)
 
 Resolved: versioning restarts at `0.2.0-beta` / versionCode 1035 (above upstream's
-1034 and the old released Pordal versionCode 2).
+1034 and the old released Pordal versionCode 2). Brand masters live in
+`~/Downloads/Pordal TV Icons/`.
 
 ## Verification protocol (after each round)
 
