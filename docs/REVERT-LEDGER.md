@@ -28,6 +28,8 @@ default flipped), **code** (behavioral edit), **build** (build/CI/infra change),
 | R2-9 | 2 | default | `StreamBadgeSettings.kt`, `StreamBadgeSettingsDataStore.kt` | `showAddonLogo` defaults `false` (hides addon logo+name on stream cards, incl. player source panel) | Restore `true` defaults |
 | R2-10 | 2 | code | `SearchDiscoverSection.kt` | catalog dropdown only rendered when >1 catalog; addon-name metadata segment honors `catalogAddonNameEnabled` | Remove `size > 1` gate / unconditionally `add(catalog.addonName)` |
 | R2-11 | 2 | code | `LibraryScreen.kt` | source badge: `else` branch blank instead of "LOCAL"; `"NUVIO"` literal → `"PORDAL"` | Restore `library_source_local` string and `"NUVIO"` |
+| R3-1 | 3 | default | `AddonPreferences.kt` | default addons: Cinemeta → `http://addon.pordal.app:60201` (OpenSubtitles kept — addon has no subtitles resource) | Restore `https://v3-cinemeta.strem.io`; only affects fresh installs (DataStore keeps existing users' addons) |
+| R3-2 | 3 | code | `AddonRepositoryImpl.kt` | `getInstalledAddons()`: emit empty list when cold cache + failed manifest fetch (was: no emission → permanent black screen at boot gate) | Genuine upstream bug fix — keep; candidate to upstream |
 
 Not ledgered (not deviations): `local.properties`, `nuviotv.jks` dev keystore
 (both gitignored, machine-local only).

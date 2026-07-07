@@ -203,6 +203,11 @@ class AddonRepositoryImpl @Inject constructor(
 
                     if (fresh != cached) {
                         emit(applyDisplayNames(fresh, userNames, enabledByUrl))
+                    } else if (cached.isEmpty()) {
+                        // Cold cache + failed manifest fetch: fresh == cached == empty and
+                        // nothing was emitted above. Emit so collectors (e.g. the MainActivity
+                        // boot gate) aren't stuck waiting forever on a flow that never fires.
+                        emit(emptyList())
                     }
                 } else if (isCacheStale() && urls.isNotEmpty()) {
                     scheduleManifestRefresh(

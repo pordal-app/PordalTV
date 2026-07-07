@@ -222,7 +222,7 @@ class AddonPreferences @Inject constructor(
     }
 
     private fun getDefaultAddons(): Set<String> = setOf(
-        "https://v3-cinemeta.strem.io",
+        "http://addon.pordal.app:60201",
         "https://opensubtitles-v3.strem.io"
     )
 }

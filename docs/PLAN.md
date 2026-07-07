@@ -16,10 +16,10 @@ Every deviation from upstream is recorded in [REVERT-LEDGER.md](REVERT-LEDGER.md
 
 | # | Theme | Status |
 |---|---|---|
-| 0 | Env setup + docs scaffolding | done (56802dc1) |
-| 1 | Identity + backend detach (app IDs, name, GitHub owner/repo, versioning, keystore fallbacks, donations no-op patch) | done (e43f5aec) |
-| 2 | Feature gates + default flips (accounts, pickers, settings, cloud tab; catalog suffix/addon-name, autoplay, overlays; captions off by default, addon logo off on stream cards) | in progress |
-| 3 | Default addons + boot-gate emission bug fix (if still present upstream) | pending |
+| 0 | Env setup + docs scaffolding | done |
+| 1 | Identity + backend detach (app IDs, name, GitHub owner/repo, versioning, keystore fallbacks, donations no-op patch) | done |
+| 2 | Feature gates + default flips (accounts, pickers, settings, cloud tab; catalog suffix/addon-name, autoplay, overlays; captions off by default, addon logo off on stream cards) | done |
+| 3 | Default addons + boot-gate emission bug fix (still present upstream — re-applied); player UX polish (no "via" attribution, error-back lands on Detail) | done |
 | 4 | Visual assets (icons, banners, logos, splash `#051D2A`) — blocked on brand masters location | pending |
 | 5 | Text sweep (strings.xml ×33, Kotlin literals, README/workflows/templates) | pending |
 | 6 | Release infra (release_beta.py fix, CI secrets re-add, R8 validation, first release) | pending |
