@@ -41,6 +41,7 @@ backups/
 .supabase_db.env
 scripts/*
 !scripts/release_beta.py
+!scripts/sweep_strings.py
 /supabase
 tv-samples
 HOME_UI_OPTIMIZATION_NOTES.local.md

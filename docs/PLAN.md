@@ -22,7 +22,7 @@ Every deviation from upstream is recorded in [REVERT-LEDGER.md](REVERT-LEDGER.md
 | 3 | Default addons + boot-gate emission bug fix (still present upstream — re-applied); player UX polish (no "via" attribution, error-back lands on Detail) | done |
 | 4 | Visual assets (icons, banners, logos; sidebar wordmark is a mark+text lockup). In-app recoloring was tried and rejected — images only, upstream colors stay | done |
 | 5 | Text sweep — A: app strings (33 locales) + Kotlin literals; B: README/workflows/templates/repo metadata | done |
-| 6 | Release infra (release_beta.py fix, CI secrets re-add, R8 validation, first release) | pending |
+| 6 | Release infra (release_beta.py fix, CI secrets re-add, R8 validation, first release) | done — v0.2.0-beta published, signature + in-app updater verified end-to-end |
 
 ## Fixed facts
 
