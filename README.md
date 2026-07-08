@@ -4,27 +4,50 @@
 
   # PordalTV
 
+  **All of your streaming services. One app.**
+
+  <p>Sign in once, search everywhere, press play.</p>
+
   <p>
-    A lean Android TV media player powered by the Stremio addon ecosystem.
-    <br />
-    Kotlin • Jetpack Compose • TV-first playback
+    <a href="https://github.com/pordal-app/PordalTV/releases"><img src="https://img.shields.io/github/v/release/pordal-app/PordalTV?include_prereleases&label=release" alt="Latest release" /></a>
+    <img src="https://img.shields.io/badge/platform-Android%20TV-3DDC84?logo=android&logoColor=white" alt="Android TV" />
+    <img src="https://img.shields.io/badge/Kotlin-Jetpack%20Compose-7F52FF?logo=kotlin&logoColor=white" alt="Kotlin / Jetpack Compose" />
+    <a href="LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0-blue" alt="GPL-3.0" /></a>
   </p>
 
 </div>
 
-## About
+## The idea
 
-PordalTV is a streamlined media player for Android TV. It boots straight into a
-curated home screen, resolves content and sources through Stremio-compatible
-addons, and plays with a click — no accounts, no onboarding, no source-picking
-ceremony.
+Watching TV now means juggling half a dozen apps, each with its own search, its
+own watchlist, and its own idea of where you left off. Pordal's goal is to
+collapse that into a single front door: sign into each of your OTT platforms
+once, and Pordal handles the rest —
 
-PordalTV is a fork of the open-source
-[NuvioTV](https://github.com/NuvioMedia/NuvioTV) project. Enormous credit to the
+- **One search** across every service you subscribe to
+- **One browsing surface** — home screen, discovery, and watchlists that span
+  services instead of being siloed inside them
+- **One place to press play** — Pordal figures out which of your services has
+  the title and starts playback
+
+## Where it is today
+
+Pordal is early, and this repo is the foundation: a fork of the open-source
+[NuvioTV](https://github.com/NuvioMedia/NuvioTV) project, chosen as a
+quickstart for a great TV playback experience and UI. Enormous credit to the
 NuvioTV authors and contributors — the player engine, addon client, and UI
-foundations are theirs. This fork trims the experience down to a
-proof-of-concept shape (features are gated, not removed) and rebrands the
-surface.
+foundations are theirs. This fork trims the experience to a proof-of-concept
+shape (features are gated, not removed) and rebrands the surface.
+
+Today the app boots straight into a curated home screen, resolves content
+through Stremio-compatible addons, and plays with a click. From here, the
+roadmap builds toward the multi-service vision:
+
+- [x] TV-first playback and browsing foundation
+- [ ] OTT platform sign-in and account linking
+- [ ] Unified cross-service search
+- [ ] Cross-service browsing, watchlists, and continue-watching
+- [ ] Playback handoff to the right service for each title
 
 ## Installation
 
@@ -55,6 +78,8 @@ throwaway keystore at the repo root with
 ```sh
 ./gradlew :app:assembleFullDebug
 ```
+
+## Documentation
 
 Project documentation lives in [docs/PLAN.md](docs/PLAN.md); every deviation
 from upstream is tracked in [docs/REVERT-LEDGER.md](docs/REVERT-LEDGER.md).
